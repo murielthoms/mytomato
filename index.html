@@ -4,18 +4,33 @@
 	<meta charset="UTF-8">
 	<title>compteurPomodoro</title>
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" type="text/css" href="tomato/semantic/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
 </head>
+
 <body>
-<div class="blue buttons ">
-  <button class="massive ui button"><font><font>Pomodoro</font></font></button>
-  <button class="massive ui button"><font><font>temps court</font></font></button>
-  <button class="massive ui button"><font><font>temps long</font></font></button>
+
+<div class="blue ui buttons">
+  <button class="massive ui button" id="pomodoro">Pomodoro</button>
+  <button class="massive ui button" id="pauseCourte">pause courte</button>
+  <button class="massive ui button" id="pauseLongue">pause longue</button>
+</div>
+
+<div class="min">
+	<span id="minutes"></span>
+	<span id="secondes"></span>
+</div>
+
+<div class="departStop">
+<button class="positive massive ui button" id="demarrer">Démarrer</button>
+<button class="negative massive ui button" id="stop">Stop</button>
+<button class="massive ui button" id="reinitialiser">Réinitialiser</button>
 </div>
 
 
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="tomato/semantic/semantic.min.js"></script>
+	<script src="semantic/semantic.min.js"></script>
 	<script src="app.js"></script>		
 </body>
 </html>
