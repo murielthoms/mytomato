@@ -1,72 +1,101 @@
-var totalSecondes = 1500;
-var totalSecondes2 = 600;
-var totalSecondes3 = 300;
-var interval;
-var demarrer;
+(function() {
+	app = {
+		interval: null,
+		timerSecondes: null,
+		defaultTimerSecondes: 3600,
+		init: function() {
+			app.listeners();
+		},
 
-$('#pomodoro').on('click', function(){
-	return pomodoro();
-});
+		listeners: function(){
+			$('#pomodoro').on('click', app.pomodoro);
+			$('#pauseCourte').on('click', app.pauseCourte);
+			$('#pauseLongue').on('click', app.pauseLongue);
+			$('#demarrer').on('click', app.demarrer);
+			$('#stop').on('click', app.stop);
+			$('#reinitialiser').on('click', app. reinitialiser);
+		},
 
-$('#pauseCourte').on('click',function(){
-	return pauseCourte();
-});
+		pomodoro: function(){
+			app.timerSecondes = 1500;
+			app.updateView();
+			app.demarrer();
+		},
 
-$('#pauseLongue').on('click',function(){
-	return pauseLongue();
-});
-
-$('#demarrer').on('click', function() {
-
-});
-
-
-function pauseCourte() {
-	var interval = setInterval(function() {
-
-		$('#minutes').text(ajouterZero(Math.floor(300 / 60)));
-		$('#secondes').text(ajouterZero(Math.floor(300 % 60)));
-		totalSecondes --;
-
-		if(totalSecondes < 0){
-			clearInterval(interval);
-
-		}
-	}, 1000);
-};
-
-function pomodoro() {
-	var interval = setInterval(function() {
-		$('#minutes').text(Math.floor( totalSecondes / 60));
-		$('#secondes').text(ajouterZero(Math.floor(totalSecondes % 60)));
-		totalSecondes --;
-
-		if(totalSecondes < 0){
-			clearInterval(interval);
+		pauseCourte: function(){
+			app.timerSecondes = 300;
+			app.updateView();
+			app.demarrer();
 			
-		}
-	}, 1000);
-};
+		},
 
-function pauseLongue() {
-	var interval = setInterval(function() {
+		pauseLongue: function(){
+			app.timerSecondes = 600;
+			app.updateView();
+			app.demarrer();
+		},
 
-		$('#minutes').text(ajouterZero(Math.floor(totalSecondes2 / 60)));
-		$('#secondes').text(ajouterZero(Math.floor(totalSecondes2 % 60)));
-		totalSecondes --;
+		decrement: function(){
+			app.timerSecondes--;
+			app.updateView();
 
-		if(totalSecondes2 < 0){
-			clearInterval(interval);
-			
-		}
-	}, 1000);
-};
+			if(app.timerSecondes === 0){
+				app.stop();
+			}
 
 
+		},
 
-function ajouterZero(nombre) {
-	if (nombre < 10 ) {
-		nombre = '0' + nombre;
-	}
-	return nombre;
-};
+		demarrer: function(){
+
+			app.stop();	
+			app.interval = setInterval(app.decrement, 1000);
+		},
+
+		
+
+		stop: function(){
+			clearInterval(app.interval);
+
+		},
+
+		reinitialiser: function(){
+			app.timerSecondes = app.defaultTimerSecondes;
+			app.demarrer();
+
+		},
+
+		updateView: function(){
+
+			var minutes =parseInt(app.timerSecondes / 60 ,10);
+			var secondes = parseInt(app.timerSecondes % 60, 10);
+			$('#minutes').html(app.addZero(minutes));
+			$('#secondes').html(app.addZero(secondes));
+		},
+
+		addZero: function(nombre){
+			if (nombre < 10) {
+				nombre = '0' + nombre;
+			}
+			return nombre;
+
+		},
+	};
+	app.init();
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
