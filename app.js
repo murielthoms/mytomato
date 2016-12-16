@@ -2,7 +2,6 @@
 	app = {
 		interval: null,
 		timerSecondes: null,
-		defaultTimerSecondes: 3600,
 		init: function() {
 			app.listeners();
 		},
@@ -60,8 +59,8 @@
 		},
 
 		reinitialiser: function(){
-			app.timerSecondes = app.defaultTimerSecondes;
-			app.demarrer();
+			app.timerSecondes = 1500;
+			app.updateView();
 
 		},
 
